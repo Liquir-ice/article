@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Contact Me!</h1>
-</body>
-</html>
+@extends('app')
+
+@section('content')
+    <h1>Contact me</h1>
+@stop
+
+@section('footer')
+    <script type="text/javascript"> alert("hello");</script>
+@stop
