@@ -29,12 +29,24 @@ class PagesController extends Controller
         // $data['name'] = $name;
         // return view('pages/about')->with($data);
 
+
         // compact : Create array containing variables and their values
         $first = 'luke';
         $last = 'boh';
         $name = $name;
-        return view('pages/about', compact('first', 'last', 'name'));
+        $people = [
+            'taylor swift',
+            'nemo',
+            'curry'
+        ];
+
+        return view('pages/about', compact('first', 'last', 'name', 'people'));
 
 
+    }
+
+    public function contact()
+    {
+        return view('pages/contact');
     }
 }
