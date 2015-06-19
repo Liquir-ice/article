@@ -11,6 +11,17 @@
 |
 */
 
+/**
+ * When i type http://localhost:8080/ , it will take me go to welcome view
+ */
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('home', 'WelcomeController@index');
+
+/**
+ * When i type http://localhost:8080/contact , it will take me go to welcome controller
+ * welcome controller path : app/Http/Controllers/WelcomeController.php
+ */
+Route::get('contact', 'WelcomeController@contact');
