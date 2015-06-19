@@ -1,16 +1,36 @@
+'use strict';
+
 var elixir = require('laravel-elixir');
+require('laravel-elixir-wiredep');
+require('laravel-elixir-useref');
+require('laravel-elixir-browser-sync');
+require('laravel-elixir-serve');
+require('laravel-elixir-sync');
+require('laravel-elixir-jshint');
+require('laravel-elixir-clean');
+require('laravel-elixir-style-guide');
+require('laravel-elixir-apidoc');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Less
- | file for our application, as well as publishing vendor resources.
- |
- */
+elixir(function (mix) {
+    var port = 8000;
 
-elixir(function(mix) {
-    mix.less('app.less');
+    mix.clean()
+        .sass('*.scss')
+        .wiredep()
+        .jshint()
+        .sync('resources/assets/js/**/*.js', 'public/js');
+
+    if (elixir.config.production) {
+        mix.useref({src: false})
+            .version(['js/*.js', 'css/*.css'])
+            .styleGuide()
+            .apidoc();
+    } else {
+        mix.serve({
+            port: port
+        }).browserSync(null, {
+            proxy: 'localhost:' + port,
+            reloadDelay: 2000
+        });
+    }
 });

@@ -1,0 +1,12 @@
+{
+  "name": "article",
+  "homepage": "https://github.com/Liquir-ice/article",
+  "authors": [
+    "Liquir-ice <liqirice@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "groot-theme": "~0.2.0"
+  }
+}
