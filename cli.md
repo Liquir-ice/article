@@ -228,3 +228,6 @@ Illuminate\Database\Eloquent\MassAssignmentException with message 'title'
        "updated_at"   => "2015-06-20 14:55:41",
        "published_at" => "2015-06-20 14:50:28"
    ]
+
+# Form section https://github.com/illuminate/html
+$ composer require illuminate/html
