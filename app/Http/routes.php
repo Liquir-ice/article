@@ -34,7 +34,12 @@ Route::get('contact', 'PagesController@contact');
 
 Route::get('articles', 'ArticlesController@index');
 
+Route::get('articles/create', 'ArticlesController@create');
+// When get 'articles/{anythings}', it will go to show controller. So create route must locate before 'articles/{id}'
 Route::get('articles/{id}', 'ArticlesController@show');
+
+Route::post('articles', 'ArticlesController@store');
+
 
 // Route::get('foo', function()
 // {
