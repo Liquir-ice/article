@@ -27,6 +27,15 @@
 
         <div class="form-group">
 
+            {!! Form::label('published_at', 'Published On:') !!}
+
+            <!-- {!! Form::input('date', 'published_at', Carbon\Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!} -->
+            {!! Form::input('date', 'published_at', date('Y-m-d'), ['class' => 'form-control']) !!}
+
+        </div>
+
+        <div class="form-group">
+
             {!! Form::submit('Add Article', ['class' => 'btn btn-primary form-control']) !!}
 
         </div>
