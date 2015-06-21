@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
 
-use Request;
+// use Request;
 use App\Article;
 use App\Http\Requests;
+use App\Http\Requests\CreateArticleRequest;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
@@ -52,7 +53,7 @@ class ArticlesController extends Controller
         return view('articles/create');
     }
 
-    public function store()
+    public function store(CreateArticleRequest $request)
     {
         // $input = Request::all();
         // Article::create($input);
@@ -69,11 +70,27 @@ class ArticlesController extends Controller
 
         // $input['published_at'] = Carbon::now();
 
+        // Article::create(Request::all());
+
+        // validation
 
 
-        Article::create(Request::all());
-        Article::create(Request::all());
+        Article::create($request->all());
+
+
 
         return redirect('articles');
     }
+
+    // use Illuminate\Http\Request;
+    // quickly develop, but some people think that request should not be in controller
+    // public function store(Request $request)
+    // {
+    //     $this->validation($request, ['title' => 'required', 'body' => 'required']);
+
+    //     Article::create($request->all());
+
+    //     return redirect('articles');
+
+    // }
 }
