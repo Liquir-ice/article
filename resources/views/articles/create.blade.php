@@ -8,12 +8,12 @@
 
     {!! Form::open(['url' => 'articles']) !!}
 
-        <div class="form-group">
+        <!-- <div class="form-group">
 
-            {!! Form::label('title', 'Title:') !!}
+            {!! Form::label('title', 'Title:') !!} -->
 
             <!-- {!! Form::text('name', null, ['class' => 'form-control', 'foo' => 'bar']) !!} -->
-            {!! Form::text('title', null, ['class' => 'form-control']) !!}
+            <!-- {!! Form::text('title', null, ['class' => 'form-control']) !!}
 
         </div>
 
@@ -27,10 +27,10 @@
 
         <div class="form-group">
 
-            {!! Form::label('published_at', 'Published On:') !!}
+            {!! Form::label('published_at', 'Published On:') !!} -->
 
             <!-- {!! Form::input('date', 'published_at', Carbon\Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!} -->
-            {!! Form::input('date', 'published_at', date('Y-m-d'), ['class' => 'form-control']) !!}
+            <!-- {!! Form::input('date', 'published_at', date('Y-m-d'), ['class' => 'form-control']) !!}
 
         </div>
 
@@ -38,16 +38,21 @@
 
             {!! Form::submit('Add Article', ['class' => 'btn btn-primary form-control']) !!}
 
-        </div>
+        </div> -->
+
+        @include ('articles.form', ['submitButtonText' => 'Add Article'])
 
     {!! Form::close() !!}
 
     <!-- {{ var_dump($errors) }} -->
-    @if ($errors->any())
+    <!-- @if ($errors->any())
         <ul class="alert alert-danger">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
-    @endif
+    @endif -->
+
+    @include('errors.list')
+
 @stop
