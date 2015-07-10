@@ -75,6 +75,8 @@ class ArticlesController extends Controller
 
         // validation
 
+        // Authenticate user
+        // Auth::user();
 
         Article::create($request->all());
 
