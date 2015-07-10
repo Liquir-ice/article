@@ -231,3 +231,147 @@ Illuminate\Database\Eloquent\MassAssignmentException with message 'title'
 
 # Form section https://github.com/illuminate/html
 $ composer require illuminate/html
+
+=========================== Section Eloquent Relationship ==============================
+>>> $user = new App\User;
+=> <App\User #0000000070885bf30000000100bd7b94> {}
+>>> $user->name = 'jon doe';
+=> "jon doe"
+>>> $user->email = 'john@example.com';
+=> "john@example.com"
+>>> $user->password = Hash::make('password');
+>>> $user->password = bcrypt('password');
+=> "$2y$10$3jVRI586PMmZtA3X5d44q.Ai2R9oLNcrX/cddhdBjZWwvDKrwcb.q"
+>>> $user-save();
+>>> App\User::first()->toArray();
+=> [
+       "id"         => 1,
+       "name"       => "john doe",
+       "email"      => "john@example.com",
+       "created_at" => "2015-07-10 08:49:23",
+       "updated_at" => "2015-07-10 08:49:23"
+   ]
+>>> App\Article::first()->toArray();
+=> [
+       "id"           => 1,
+       "user_id"      => 1,
+       "title"        => "new article",
+       "body"         => "new body",
+       "created_at"   => "2015-07-10 08:53:25",
+       "updated_at"   => "2015-07-10 08:53:25",
+       "published_at" => "2015-07-10 00:00:00",
+       "excerpt"      => null
+   ]
+>>> $user = App\User::first();
+=> <App\User #00000000358e8f8e0000000178b61a40> {
+       id: 1,
+       name: "john doe",
+       email: "john@example.com",
+       created_at: "2015-07-10 08:49:23",
+       updated_at: "2015-07-10 08:49:23"
+   }
+>>> $user->articles->toArray();
+=> [
+       [
+           "id"           => 1,
+           "user_id"      => 1,
+           "title"        => "new article",
+           "body"         => "new body",
+           "created_at"   => "2015-07-10 08:53:25",
+           "updated_at"   => "2015-07-10 08:53:25",
+           "published_at" => "2015-07-10 00:00:00",
+           "excerpt"      => null
+       ]
+   ]
+// eloquent model collection
+>>> $user->articles();
+=> <Illuminate\Database\Eloquent\Relations\HasMany #00000000358e8f990000000178b61a40> {}
+>>> $user->articles()->get()->toArray();
+=> [
+       [
+           "id"           => 1,
+           "user_id"      => 1,
+           "title"        => "new article",
+           "body"         => "new body",
+           "created_at"   => "2015-07-10 08:53:25",
+           "updated_at"   => "2015-07-10 08:53:25",
+           "published_at" => "2015-07-10 00:00:00",
+           "excerpt"      => null
+       ]
+   ]
+>>> $user->articles()->where('title', 'new article')->get()->toArray();
+=> [
+       [
+           "id"           => 1,
+           "user_id"      => 1,
+           "title"        => "new article",
+           "body"         => "new body",
+           "created_at"   => "2015-07-10 08:53:25",
+           "updated_at"   => "2015-07-10 08:53:25",
+           "published_at" => "2015-07-10 00:00:00",
+           "excerpt"      => null
+       ]
+   ]
+>>> $article = App\Article::first();
+=> <App\Article #00000000358e8ff70000000178b61a40> {
+       id: 1,
+       user_id: 1,
+       title: "new article",
+       body: "new body",
+       created_at: "2015-07-10 08:53:25",
+       updated_at: "2015-07-10 08:53:25",
+       published_at: "2015-07-10 00:00:00",
+       excerpt: null
+   }
+>>> $article->user->toArray();
+=> [
+       "id"         => 1,
+       "name"       => "john doe",
+       "email"      => "john@example.com",
+       "created_at" => "2015-07-10 08:49:23",
+       "updated_at" => "2015-07-10 08:49:23"
+   ]
+// select john doe user
+>>> $user = App\User::where('name', 'john doe')->first();
+=> <App\User #00000000358e8f8a0000000178b61a40> {
+       id: 1,
+       name: "john doe",
+       email: "john@example.com",
+       created_at: "2015-07-10 08:49:23",
+       updated_at: "2015-07-10 08:49:23"
+   }
+//output select
+>>> $user->toArray();
+=> [
+       "id"         => 1,
+       "name"       => "john doe",
+       "email"      => "john@example.com",
+       "created_at" => "2015-07-10 08:49:23",
+       "updated_at" => "2015-07-10 08:49:23"
+   ]
+>>> $articles = $user->articles;
+=> <Illuminate\Database\Eloquent\Collection #00000000358e8f9e0000000178b61a40> [
+       <App\Article #00000000358e8f850000000178b61a40> {
+           id: 1,
+           user_id: 1,
+           title: "new article",
+           body: "new body",
+           created_at: "2015-07-10 08:53:25",
+           updated_at: "2015-07-10 08:53:25",
+           published_at: "2015-07-10 00:00:00",
+           excerpt: null
+       }
+   ]
+>>> $articles->toArray();
+=> [
+       [
+           "id"           => 1,
+           "user_id"      => 1,
+           "title"        => "new article",
+           "body"         => "new body",
+           "created_at"   => "2015-07-10 08:53:25",
+           "updated_at"   => "2015-07-10 08:53:25",
+           "published_at" => "2015-07-10 00:00:00",
+           "excerpt"      => null
+       ]
+   ]
