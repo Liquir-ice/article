@@ -461,3 +461,6 @@ $ composer require illuminate/html
        "created_at"   => "2015-07-12 06:01:27",
        "id"           => 4
    ]
+
+=========================== Section Ogres Are Like Middleware ==============================
+php artisan make:middleware RedirectifNotAManager

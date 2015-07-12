@@ -14,6 +14,14 @@ use Carbon\Carbon;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        // only create page will authenticate
+        $this->middleware('auth', ['only' => 'create']);
+        // except create page will authenticate
+        // $this->middleware('auth', ['except' => 'create']);
+    }
+
     public function index()
     {
         // $articles = Article::all();
@@ -56,6 +64,11 @@ class ArticlesController extends Controller
 
     public function create()
     {
+
+        // if (Auth::guest()) {
+        //     return redirect('articles');
+        // }
+
         return view('articles/create');
     }
 
