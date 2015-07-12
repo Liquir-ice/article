@@ -375,3 +375,89 @@ $ composer require illuminate/html
            "excerpt"      => null
        ]
    ]
+
+=========================== Section Easy Auth ==============================
+// grab the user name liquirice
+>>> $liquir = App\User::where('name', 'liquirice')->first();
+=> <App\User #000000000927b9a5000000010b8f37e9> {
+       id: 3,
+       name: "liquirice",
+       email: "liquirice@gmail.com",
+       created_at: "2015-07-12 03:24:29",
+       updated_at: "2015-07-12 03:54:42"
+   }
+// print it as array
+>>> $liquir->toArray();
+=> [
+       "id"         => 3,
+       "name"       => "liquirice",
+       "email"      => "liquirice@gmail.com",
+       "created_at" => "2015-07-12 03:24:29",
+       "updated_at" => "2015-07-12 03:54:42"
+   ]
+// grab the articles that has liquirice written
+>>> $liquir->articles->toArray() ;
+=> <Illuminate\Database\Eloquent\Collection #000000000927b9a9000000010b8f37e9> [
+       <App\Article #000000000927b9a6000000010b8f37e9> {
+           id: 2,
+           user_id: 3,
+           title: "john",
+           body: "johen doe",
+           created_at: "2015-07-12 04:08:54",
+           updated_at: "2015-07-12 04:08:54",
+           published_at: "2015-07-12 00:00:00",
+           excerpt: null
+       },
+       <App\Article #000000000927b9d6000000010b8f37e9> {
+           id: 3,
+           user_id: 3,
+           title: "liquirice",
+           body: "liquirice",
+           created_at: "2015-07-12 04:09:25",
+           updated_at: "2015-07-12 04:09:25",
+           published_at: "2015-07-12 00:00:00",
+           excerpt: null
+       }
+   ]
+// create a new article without user_id
+>>>  $article = new App\Article(['title' => 'new', 'body' => 'new body', 'published_at' => Carbon\Carbon::now()]);
+=> <App\Article #000000000927b9a0000000010b8f37e9> {
+       title: "new",
+       body: "new body",
+       published_at: <Carbon\Carbon #000000000927b9ab000000010b8f2241> {
+           date: "2015-07-12 06:00:42.000000",
+           timezone_type: 3,
+           timezone: "UTC"
+       }
+   }
+>>> $article->toArray();
+=> [
+       "title"        => "new",
+       "body"         => "new body",
+       "published_at" => "2015-07-12 06:00:42"
+   ]
+// use eloquent insert the article with user_id
+>>> $liquir->articles()->save($article);
+=> <App\Article #000000000927b9a0000000010b8f37e9> {
+       title: "new",
+       body: "new body",
+       published_at: <Carbon\Carbon #000000000927b9ab000000010b8f2241> {
+           date: "2015-07-12 06:00:42.000000",
+           timezone_type: 3,
+           timezone: "UTC"
+       },
+       user_id: 3,
+       updated_at: "2015-07-12 06:01:27",
+       created_at: "2015-07-12 06:01:27",
+       id: 4
+   }
+>>> $article->toArray();
+=> [
+       "title"        => "new",
+       "body"         => "new body",
+       "published_at" => "2015-07-12 06:00:42",
+       "user_id"      => 3,
+       "updated_at"   => "2015-07-12 06:01:27",
+       "created_at"   => "2015-07-12 06:01:27",
+       "id"           => 4
+   ]
