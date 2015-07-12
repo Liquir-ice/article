@@ -48,3 +48,8 @@ Route::resource('articles', 'ArticlesController');
 // {
 //     return 'bar';
 // });
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController'
+]);
