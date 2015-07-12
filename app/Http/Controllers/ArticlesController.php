@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 
 // use Request;
+use Auth;
 use App\Article;
 use App\Http\Requests;
 use App\Http\Requests\ArticleRequest;
@@ -20,6 +21,11 @@ class ArticlesController extends Controller
         // $articles = Article::latest()->get();
         // $articles = Article::latest('published_at')->get();
         // $articles = Article::order_by('published_at', 'desc')->get();
+
+        // return authenticate data
+        // return \Auth::user()->name;
+
+
 
         // $articles = Article::latest('published_at')->where('published_at', '<=', Carbon::now())->get();
         $articles = Article::latest('published_at')->published()->get();
@@ -73,15 +79,24 @@ class ArticlesController extends Controller
 
         // Article::create(Request::all());
 
+        // Article::create($request->all());
+
         // validation
 
         // Authenticate user
         // Auth::user();
 
-        Article::create($request->all());
+        // $request = $request->all();
+        // $request['user_id'] = Auth::id();
 
+        // laravel helper function
+        // array_add
 
-
+        $article = new Article($request->all());
+        // eloquent
+        // Auth::user()->articles() you will get a collecion
+        // Use it as a method
+        Auth::user()->articles()->save($article);
         return redirect('articles');
     }
 
