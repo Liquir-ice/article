@@ -48,4 +48,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
         // return true;
     }
+
+    /**
+     * It will encrypt user password
+     * @param [type] $password [description]
+     */
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = mycrypt($password);
+    // } // $user->password = 'foobar'
 }
